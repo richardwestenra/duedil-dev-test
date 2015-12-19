@@ -1,17 +1,8 @@
-# Build Brief
-
+# Duedil Dev Task
 
 ## Documents
 
-
-## Fonts 
-
-
-## Colours
-
-
-## Functionality notes
-
+Instructions: See [Task.md](Task.md).
 
 ## Dev setup/installation:
 
