@@ -1,0 +1,13 @@
+{
+  "name": "duedil-dev-test",
+  "private": true,
+  "dependencies": {
+    "respond": "~1.4.2",
+    "jquery": "~1.11.3",
+    "modernizr": "~2.8.3"
+  },
+  "devDependencies": {
+    "chai": "~3.4.2",
+    "mocha": "~2.3.4"
+  }
+}
