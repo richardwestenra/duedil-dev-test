@@ -17,16 +17,32 @@
     .find('li').each(function (i) {
       $(this).data( issues[i] );
     });
-    // .end()
-    // .on('click','li',function (){
-    //   console.log($(this).data());
-    // });
+  }
+
+  function filterList (type, value) {
+    $('#filters').html(`${type}: ${value}`)
+    $issues.find('li').each(function () {
+      var datum = $(this).data();
+      var hidden = datum[type] !== value;
+      $(this).toggleClass('hidden', hidden);
+    });
   }
 
 
 
   $(function(){
     $.getJSON('data/issues.json', makeList);
+
+    $issues.on('click', '.issue_filter', function (e){
+      var data = $(this).parents('li').data();
+      var type = $(this).data('type');
+      var value = $(this).text();
+      console.log(type, value);
+      filterList(type, value);
+
+
+      e.preventDefault();
+    });
   });
 
 

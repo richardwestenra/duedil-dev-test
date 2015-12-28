@@ -32,6 +32,7 @@
 
     <header class="header wrapper">
       <h1>Duedil Issue Tracker</h1>
+      <p id="filters"></p>
     </header>
 
     <main class="main wrapper">
@@ -52,19 +53,19 @@
                 {{#project}}
                   <p title="Project">
                     <img class="issue_icon" src="images/project.svg" alt="Project icon"/>
-                    <a class="issue_project issue_filter issue_filter-project" href="#">{{project}}</a>
+                    <a class="issue_filter issue_filter-project" data-type="project" href="#">{{project}}</a>
                   </p>
                 {{/project}}
                 {{#category}}
                   <p title="Category">
                     <img class="issue_icon" src="images/category.svg" alt="Category icon"/>
-                    <a class="issue_filter issue_filter-category" href="#">{{category}}</a>
+                    <a class="issue_filter issue_filter-category" data-type="category" href="#">{{category}}</a>
                   </p>
                 {{/category}}
                 {{#assignee}}
                   <p title="Assignee">
                     <img class="issue_icon" src="images/user.svg" alt="Assignee icon"/>
-                    <a class="issue_filter issue_filter-assignee" href="#">{{assignee}}</a>
+                    <a class="issue_filter issue_filter-assignee" data-type="assignee" href="#">{{assignee}}</a>
                   </p>
                 {{/assignee}}
               </div>

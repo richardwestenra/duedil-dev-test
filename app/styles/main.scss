@@ -13,6 +13,14 @@
   @include clearfix;
 }
 .issue {
+  max-height: 600px;
+  transition: all ease 0.2s;
+  overflow: hidden;
+  margin: 1em 0;
+  &.hidden {
+    max-height: 0;
+    margin: 0;
+  }
   a {
     text-decoration: none;
     &:hover, &:focus {
@@ -25,7 +33,6 @@
   border-radius: 0.2em;
   padding: 0.8em 1.1em;
   box-shadow: 0 1px 2px rgba(#000,0.15);
-  margin: 1em 0;
   position: relative;
   &:hover {
     box-shadow: 0 1px 4px rgba(#000,0.2);
