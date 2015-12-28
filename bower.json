@@ -3,8 +3,11 @@
   "private": true,
   "dependencies": {
     "respond": "~1.4.2",
-    "jquery": "~1.11.3",
-    "modernizr": "~2.8.3"
+    "jquery": "jQuery#~2.1.4",
+    "modernizr": "~2.8.3",
+    "selectize": "~0.12.1",
+    "es6-promise-polyfill": "~1.1.1",
+    "mustache.js": "~2.2.1"
   },
   "devDependencies": {
     "chai": "~3.4.2",

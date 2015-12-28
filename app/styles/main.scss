@@ -7,3 +7,97 @@
 @import "base";
 @import "fontface";
 @import "social";
+
+.issues {
+  @include noList;
+  @include clearfix;
+}
+.issue {
+  a {
+    text-decoration: none;
+    &:hover, &:focus {
+      text-decoration: underline;
+    }
+  }
+}
+.issue_padding {
+  background: $c_bg_alt;
+  border-radius: 0.2em;
+  padding: 0.8em 1.1em;
+  box-shadow: 0 1px 2px rgba(#000,0.15);
+  margin: 1em 0;
+  position: relative;
+  &:hover {
+    box-shadow: 0 1px 4px rgba(#000,0.2);
+  }
+  header {
+  }
+  h2 {
+    display: inline;
+    font-size: 1.1em;
+    margin: 0 0 0.5em;
+    font-weight: normal;
+  }
+}
+.issue_id {
+  display: inline-block;
+  width: 2em;
+  font-weight: bold;
+}
+.issue_icon {
+  width: 0.9em;
+  height: auto;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 0.2em;
+  opacity: 0.7;
+}
+.issue_meta {
+  p {
+    display: inline-block;
+    font-size: 0.8em;
+    margin: 0.3em 1em 0.3em 0;
+  }
+}
+
+.footer {
+  margin: 3em auto;
+  text-align: center;
+  p {
+    font-size: 0.8em;
+  }
+}
+
+
+// Grid mode:
+
+$issue_width: 350px;
+$issue_gap: 0.5em;
+
+.grid .wrapper {
+  max-width: none;
+}
+
+@media (min-width: #{2 * $issue_width}) {
+  .grid .issues {
+    margin-left: -$issue_gap;
+    margin-right: -$issue_gap;
+  }
+  .grid .issue {
+    float: left;
+    width: 50%;
+    padding: $issue_gap;
+  }
+  .grid .issue_padding {
+    height: 120px;
+    margin: 0;
+  }
+}
+@for $i from 2 through 8 {
+  @media (min-width: #{$i * $issue_width}) {
+    .grid .issue {
+      width: (100% / $i);
+    }
+  }
+}
+

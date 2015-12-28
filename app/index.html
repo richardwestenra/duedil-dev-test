@@ -7,6 +7,7 @@
 
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
+    <link rel="stylesheet" href="/bower_components/selectize/dist/css/selectize.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -30,20 +31,63 @@
 
 
     <header class="header wrapper">
-      <h1>nbed_metaTitle</h1>
+      <h1>Duedil Issue Tracker</h1>
     </header>
 
     <main class="main wrapper">
-      <p>main</p>
+
+      <ul id="issues" class="issues">
+      </ul>
+
+      <!-- Mustache template -->
+      <script type="text/template" id="issue-template">
+        {{#issues}}
+          <li id="issue-{{id}}" class="issue">
+            <div class="issue_padding">
+              <header>
+                <a class="issue_id" href="#issue-{{id}}">{{id}}</a>
+                <h2>{{description}}</h2>
+              </header>
+              <div class="issue_meta">
+                {{#project}}
+                  <p title="Project">
+                    <img class="issue_icon" src="images/project.svg" alt="Project icon"/>
+                    <a class="issue_project issue_filter issue_filter-project" href="#">{{project}}</a>
+                  </p>
+                {{/project}}
+                {{#category}}
+                  <p title="Category">
+                    <img class="issue_icon" src="images/category.svg" alt="Category icon"/>
+                    <a class="issue_filter issue_filter-category" href="#">{{category}}</a>
+                  </p>
+                {{/category}}
+                {{#assignee}}
+                  <p title="Assignee">
+                    <img class="issue_icon" src="images/user.svg" alt="Assignee icon"/>
+                    <a class="issue_filter issue_filter-assignee" href="#">{{assignee}}</a>
+                  </p>
+                {{/assignee}}
+              </div>
+            </div>
+          </li>
+        {{/issues}}
+      </script>
+
     </main>
 
     <footer class="footer wrapper">
-      <p>footer</p>
+      <p>Created by <a href="http://richardwestenra.com">Richard Westenra</a> as a dev interview task.</p>
+      <p>Icon credits: Richard Schumann, Víctor Fernández, and Hose Vanaclocha from <a href="https://thenounproject.com/">The Noun Project</a>.</p>
     </footer>
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
     <script src="/bower_components/jquery/dist/jquery.js"></script>
+    <script src="/bower_components/sifter/sifter.js"></script>
+    <script src="/bower_components/microplugin/src/microplugin.js"></script>
+    <script src="/bower_components/selectize/dist/js/selectize.js"></script>
+    <script src="/bower_components/es6-promise-polyfill/promise.js"></script>
+    <script src="/bower_components/mustache.js/mustache.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
