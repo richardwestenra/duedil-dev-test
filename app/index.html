@@ -23,6 +23,8 @@
     <script src="/bower_components/respond/dest/respond.src.js"></script>
     <!-- endbuild -->
     <![endif]-->
+
+    <link href='https://fonts.googleapis.com/css?family=Ubuntu:400,500' rel='stylesheet' type='text/css'>
   </head>
   <body>
     <!--[if lt IE 8]>
@@ -32,10 +34,24 @@
 
     <header class="header wrapper">
       <h1>Duedil Issue Tracker</h1>
-      <p id="filters"></p>
     </header>
 
     <main class="main wrapper">
+      <nav class="filters">
+        <h2>Filter list: <em id="filters"></em> <a href="#" id="filter-clear">Clear filters</a></h2>
+        <div class="filters_row">
+          <img class="filter_icon" src="images/project.svg" alt="Project icon"/>
+          <select id="filter-project" placeholder="Filter by project"></select>
+        </div>
+        <div class="filters_row">
+          <img class="filter_icon" src="images/category.svg" alt="Category icon"/>
+          <select id="filter-category" placeholder="Filter by category"></select>
+        </div>
+        <div class="filters_row">
+          <img class="filter_icon" src="images/user.svg" alt="Assignee icon"/>
+          <select id="filter-assignee" placeholder="Filter by assignee"></select>
+        </div>
+      </nav>
 
       <ul id="issues" class="issues">
       </ul>
@@ -47,7 +63,7 @@
             <div class="issue_padding">
               <header>
                 <a class="issue_id" href="#issue-{{id}}">{{id}}</a>
-                <h2>{{description}}</h2>
+                <h3>{{description}}</h3>
               </header>
               <div class="issue_meta">
                 {{#project}}

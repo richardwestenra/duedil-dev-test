@@ -1,10 +1,7 @@
 //--- Mixins ---//
 
-@mixin serif {
-    font-family: serif;
-}
 @mixin sansSerif {
-    font-family: sans-serif;
+    font-family: 'Ubuntu', sans-serif;
 }
 @mixin noList {
   list-style: none;
