@@ -8,6 +8,10 @@
 @import "fontface";
 @import "social";
 
+$issue_width: 350px;
+$issue_gap: 0.5em;
+
+
 %hrAfter {
   border-bottom: 1px solid rgba(#000,0.1);
   box-shadow: 0 1px 0 rgba(#fff,0.5);
@@ -16,6 +20,58 @@
 
 .header {
   @extend %hrAfter;
+  h1 {
+    display: inline-block;
+  }
+  nav {
+    float: right;
+    margin-top: 2em;
+    display: none;
+    @media (min-width: #{2 * $issue_width}) {
+      display: block;
+    }
+  }
+}
+
+.view {
+  font-size: 1em;
+  border-radius: 3px;
+  box-shadow: none;
+  border: none;
+  background: lighten($c_link,15%);
+  color: white;
+  font-weight: bold;
+  padding: 0.3em 0.6em;
+  margin: 0 0.2em;
+  display: inline-block;
+  cursor: pointer;
+  transition: all ease 0.1s;
+  outline: none;
+  &:hover, &:focus {
+    box-shadow: 0 0 0 3px white;
+    background: $c_link;
+  }
+  &.view-active {
+    pointer-events: none;
+    box-shadow: 0 0 0 3px white;
+    background: darken($c_link,9%);
+  }
+  &:before {
+    content: '';
+    width: 0.8em;
+    height: 0.8em;
+    display: inline-block;
+    margin-right: 0.4em;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
+  }
+  &-list:before {
+    background-image: url($il + 'list.svg');
+  }
+  &-grid:before {
+    background-image: url($il + 'grid.svg');
+  }
 }
 
 .filters {
@@ -27,14 +83,28 @@
     font-size: 1.1em;
     em {
       font-weight: 400;
-      display: inline-block;
       margin: 0 2em 0 0.5em;
+      display: none;
+      @media (min-width: $m_smaller) {
+        display: inline-block;
+      }
     }
     a {
       font-weight: 400;
       display: none;
       float: right;
       font-size: 0.8em;
+      &:before {
+        content: '';
+        width: 0.9em;
+        height: 0.9em;
+        display: inline-block;
+        margin-right: 0.4em;
+        position: relative;
+        top: 0.1em;
+        background: url($il + 'close.svg') no-repeat center;
+        background-size: contain;
+      }
     }
   }
 }
@@ -66,18 +136,8 @@
   @include clearfix;
 }
 .issue {
-  max-height: 600px;
-  background: $c_bg_alt;
-  border-radius: 0.2em;
-  box-shadow: 0 1px 2px rgba(#000,0.15);
-  transition: box-shadow ease 0.2s;
-  overflow: hidden;
   margin: 1em 0;
-  &:hover {
-    box-shadow: 0 1px 4px rgba(#000,0.2);
-  }
   &.hidden {
-    max-height: 0;
     margin: 0;
   }
   a {
@@ -89,6 +149,20 @@
 }
 .issue_padding {
   padding: 0.8em 1.1em;
+  background: $c_bg_alt;
+  border-radius: 0.2em;
+  box-shadow: 0 1px 2px rgba(#000,0.15);
+  transition: all ease 0.2s;
+  max-height: 600px;
+  overflow: hidden;
+  .hidden & {
+    max-height: 0;
+    margin: 0;
+    padding: 0;
+  }
+  &:hover {
+    box-shadow: 0 1px 4px rgba(#000,0.2);
+  }
   h3 {
     display: inline;
     font-size: 1.1em;
@@ -128,26 +202,29 @@
 
 // Grid mode:
 
-$issue_width: 350px;
-$issue_gap: 0.5em;
-
-.grid .wrapper {
-  max-width: none;
-}
-
 @media (min-width: #{2 * $issue_width}) {
-  .grid .issues {
-    margin-left: -$issue_gap;
-    margin-right: -$issue_gap;
-  }
-  .grid .issue {
-    float: left;
-    width: 50%;
-    padding: $issue_gap;
-  }
-  .grid .issue_padding {
-    height: 120px;
-    margin: 0;
+  .grid {
+    .wrapper {
+      max-width: 90%;
+    }
+    .issues {
+      margin-left: -$issue_gap;
+      margin-right: -$issue_gap;
+    }
+    .issue {
+      float: left;
+      width: 50%;
+      padding: $issue_gap;
+      padding: 1em;
+      margin: 0;
+      &.hidden {
+        display: none;
+      }
+    }
+    .issue_padding {
+      height: 120px;
+      margin: 0;
+    }
   }
 }
 @for $i from 2 through 8 {

@@ -3,21 +3,17 @@
 
 (function (window, $) {
 
-  const categories = ['project','category','assignee'];
+  const categories = ['project','category','assignee'],
+    lsKey = 'duedil-view';
 
   const $issues = $('#issues'),
+    $viewNav = $('#viewNav'),
     $clear = $('#filter-clear'),
     issueTemplate = $('#issue-template').html();
 
   var selectizes = [],
     // flag to avoid infinite causal loop:
     activeFilter = false;
-
-
-  // Add the jQuery unique function to the array prototype to allow chaining:
-  Array.prototype.$unique = function () {
-    return $.unique(this);
-  }
 
 
   function makeIssueList(issues) {
@@ -33,6 +29,8 @@
   }
 
 
+  // Prevent the filter event listeners from
+  // triggering themselves using a flag variable
   function preventLoop(callback) {
     activeFilter = true;
     callback();
@@ -41,9 +39,8 @@
 
 
   function filterIssueList(type, value) {
-    $('#filters').html(value);
 
-    preventLoop(() => {
+    preventLoop(function () {
       selectizes.forEach(s => {
         if (s.name === type && value) {
           s.api.setValue(value);
@@ -54,11 +51,13 @@
     });
 
     if (!value) {
+      $('#filters').html('');
       $clear.fadeOut(200);
       $issues.find('li').removeClass('hidden');
       return;
     }
 
+    $('#filters').html(value);
     $clear.fadeIn(200);
 
     $issues.find('li').each(function () {
@@ -71,10 +70,9 @@
 
   function getFilterData(data) {
     function formatData (key) {
-      return data.map(d => d[key])
-        .filter(d => !!d)
-        .$unique()
-        .sort();
+      return $.unique(
+        data.map(d => d[key]).filter(d => !!d)
+      ).sort();
     }
 
     return function (key) {
@@ -111,26 +109,54 @@
   }
 
 
+  function toggleView(view){
+
+    $viewNav.find('button')
+      .removeClass('view-active')
+      .filter(`.view-${view}`)
+      .addClass('view-active');
+
+    $('body').removeClass('list grid')
+      .addClass(view);
+  }
+
+
 
   // Initialise:
 
   $(function(){
 
+    // Update view from localStorage
+    var lsView = window.localStorage.getItem(lsKey);
+    if (lsView) {
+      toggleView(lsView);
+    }
+
+    // Get data and populate list and filters
     $.getJSON('data/issues.json', (data) => {
-      selectizes = categories.map( getFilterData(data) );
       makeIssueList(data);
+      selectizes = categories.map( getFilterData(data) );
     });
 
+    // Add clear filter button event listener
     $clear.on('click', function (e){
       filterIssueList();
       e.preventDefault();
     });
 
+    // Add inline issue filter event listener
     $issues.on('click', '.issue_filter', function (e){
       var type = $(this).data('type');
       var value = $(this).text();
       filterIssueList(type, value);
       e.preventDefault();
+    });
+
+    // Add view toggle button event listener
+    $viewNav.on('click', 'button', function () {
+      var view = $(this).text().toLowerCase();
+      toggleView(view);
+      window.localStorage.setItem(lsKey, view);
     });
 
   });
