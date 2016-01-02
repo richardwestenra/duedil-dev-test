@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8">
+    <title>Duedil Dev Test</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <link rel="stylesheet" href="styles/vendor.1c27655f.css">
+    <link rel="stylesheet" href="styles/main.0220581e.css">
+    <script src="scripts/vendor/modernizr.fbe20327.js"></script>
+
+    <!--[if lt IE 9]>
+    <script src="scripts/vendor/respond.d41d8cd9.js"></script>
+    <![endif]-->
+
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:400,500" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+    <!--[if lt IE 8]>
+      <p class="browsehappy">Sorry, your browser is not supported :(. If possible, please consider trying a <a href="http://browsehappy.com/">modern browser</a> to improve your experience.</p>
+    <![endif]-->
+
+
+    <header class="header wrapper">
+      <h1>Duedil Issue Tracker</h1>
+      <nav id="viewNav">
+        <span>View as:</span>
+        <button class="view view-list view-active">List</button>
+        <button class="view view-grid">Grid</button>
+      </nav>
+    </header>
+
+    <main class="main wrapper">
+      <nav class="filters">
+        <h2>Filter list: <em id="filters"></em> <a href="#" id="filter-clear">Clear filters</a></h2>
+        <div class="filters_row">
+          <img class="filter_icon" src="images/project.b47acc6f.svg" alt="Project icon">
+          <select id="filter-project" placeholder="Filter by project"></select>
+        </div>
+        <div class="filters_row">
+          <img class="filter_icon" src="images/category.6fad7ef2.svg" alt="Category icon">
+          <select id="filter-category" placeholder="Filter by category"></select>
+        </div>
+        <div class="filters_row">
+          <img class="filter_icon" src="images/user.9547dacc.svg" alt="Assignee icon">
+          <select id="filter-assignee" placeholder="Filter by assignee"></select>
+        </div>
+      </nav>
+
+      <ul id="issues" class="issues">
+      </ul>
+
+      <!-- Mustache template -->
+      <script type="text/template" id="issue-template">
+        {{#issues}}
+          <li id="issue-{{id}}" class="issue">
+            <div class="issue_padding">
+              <header>
+                <a class="issue_id" href="#issue-{{id}}">{{id}}</a>
+                <h3>{{description}}</h3>
+              </header>
+              <div class="issue_meta">
+                {{#project}}
+                  <p title="Project">
+                    <img class="issue_icon" src="images/project.b47acc6f.svg" alt="Project icon"/>
+                    <a class="issue_filter issue_filter-project" data-type="project" href="#">{{project}}</a>
+                  </p>
+                {{/project}}
+                {{#category}}
+                  <p title="Category">
+                    <img class="issue_icon" src="images/category.6fad7ef2.svg" alt="Category icon"/>
+                    <a class="issue_filter issue_filter-category" data-type="category" href="#">{{category}}</a>
+                  </p>
+                {{/category}}
+                {{#assignee}}
+                  <p title="Assignee">
+                    <img class="issue_icon" src="images/user.9547dacc.svg" alt="Assignee icon"/>
+                    <a class="issue_filter issue_filter-assignee" data-type="assignee" href="#">{{assignee}}</a>
+                  </p>
+                {{/assignee}}
+              </div>
+            </div>
+          </li>
+        {{/issues}}
+      </script>
+
+    </main>
+
+    <footer class="footer wrapper">
+      <p>Created by <a href="http://richardwestenra.com">Richard Westenra</a> as a dev interview task.</p>
+      <p>Icon credits: Richard Schumann, Víctor Fernández, Cole Townsend, riyazali, Aha-Soft, and Hose Vanaclocha from <a href="https://thenounproject.com/">The Noun Project</a>.</p>
+    </footer>
+
+    <script src="scripts/vendor.617240a0.js"></script>
+
+    <script src="scripts/main.fd337d76.js"></script>
+  </body>
+</html>
